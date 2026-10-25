@@ -1,0 +1,151 @@
+id,emoji,name_en,name_hi,name_mr,category,form,tier,storage,unit,pack_size,price,use_per_ae,diet,aliases,pc_kg,pc_word,sim
+rice,🍚,Rice (Kolam),चावल,तांदूळ,grain,dry,Y1,pantry,kg,1,62,0.085,all,rice|kolam|basmati|chawal|tandul|ambemohar|indrayani,,,1
+wheat_atta,🌾,Wheat atta,गेहूं का आटा,गव्हाचे पीठ,flour,dry,M2,pantry,kg,1,48,0.11,all,atta|wheat flour|chakki atta|aashirvaad|gehu|kanik,,,1
+jowar_flour,🫓,Jowar flour,ज्वार का आटा,ज्वारीचे पीठ,flour,dry,M1,pantry,kg,0.5,64,0.02,all,jowar|jwari|jowari atta,,,1
+bajra_flour,🫓,Bajra flour,बाजरे का आटा,बाजरीचे पीठ,flour,dry,M1,pantry,kg,0.5,58,0.012,all,bajra|bajri,,,1
+besan,🟡,Besan,बेसन,बेसन,flour,dry,M2,pantry,kg,0.5,96,0.006,all,besan|gram flour|chana atta|harbara pith,,,1
+rava,🥣,Rava (sooji),सूजी,रवा,flour,dry,M2,pantry,kg,0.5,52,0.008,all,rava|sooji|suji|semolina,,,1
+poha,🍘,Poha,पोहा,पोहे,grain,dry,M2,pantry,kg,0.5,64,0.014,all,poha|pohe|flattened rice|chiwda,,,1
+sabudana,⚪,Sabudana,साबूदाना,साबुदाणा,grain,dry,Y1,pantry,kg,0.5,96,0.004,all,sabudana|sago,,,1
+toor_dal,🟠,Toor dal,अरहर दाल,तूर डाळ,pulse,dry,Y1,pantry,kg,1,158,0.03,all,toor|tur|arhar|tuvar,,,1
+moong_dal,🟢,Moong dal,मूंग दाल,मूग डाळ,pulse,dry,Y1,pantry,kg,0.5,132,0.01,all,moong dal|mung dal|moong yellow,,,1
+chana_dal,🟤,Chana dal,चना दाल,हरभरा डाळ,pulse,dry,Y1,pantry,kg,0.5,104,0.007,all,chana dal|harbhara dal,,,1
+masoor_dal,🔴,Masoor dal,मसूर दाल,मसूर डाळ,pulse,dry,Y1,pantry,kg,0.5,118,0.006,all,masoor|masur,,,1
+matki,🌱,Matki (moth beans),मोठ,मटकी,pulse,dry,Y1,pantry,kg,0.5,140,0.006,all,matki|moth|mataki,,,1
+peanuts,🥜,Peanuts,मूंगफली,शेंगदाणे,pulse,dry,M6,pantry,kg,0.5,150,0.008,all,peanut|shengdana|groundnut|moongphali,,,1
+sugar,🧂,Sugar,चीनी,साखर,misc,dry,Y1,pantry,kg,1,46,0.018,all,sugar|cheeni|sakhar,,,1
+jaggery,🟫,Jaggery,गुड़,गूळ,misc,dry,M6,pantry,kg,0.5,70,0.006,all,jaggery|gul|gud,,,1
+salt,🧂,Salt,नमक,मीठ,misc,dry,Y1,pantry,kg,1,28,0.006,all,salt|namak|tata salt|meeth,,,1
+tea,🍵,Tea leaves,चाय पत्ती,चहा पावडर,misc,dry,M6,pantry,kg,0.25,560,0.004,all,tea|chai|chaha|red label|tata tea|society tea,,,1
+oil,🫙,Groundnut oil,मूंगफली तेल,शेंगदाणा तेल,oil,liquid,M6,pantry,L,1,190,0.022,all,oil|tel|groundnut oil,,,1
+ghee,🧈,Ghee,घी,तूप,oil,liquid,M6,pantry,kg,0.5,620,0.004,all,ghee|toop|tup,,,1
+turmeric,🟨,Turmeric powder,हल्दी,हळद,spice,dry,Y1,pantry,kg,0.1,260,0.0015,all,haldi|halad|turmeric,,,1
+chilli_powder,🌶️,Chilli powder,लाल मिर्च,लाल तिखट,spice,dry,M6,pantry,kg,0.1,320,0.002,all,chilli powder|mirchi powder|lal tikhat,,,1
+jeera,🌰,Jeera,जीरा,जिरे,spice,dry,Y1,pantry,kg,0.1,600,0.0012,all,jeera|jira|cumin,,,1
+mustard_seeds,⚫,Mustard seeds,राई,मोहरी,spice,dry,Y1,pantry,kg,0.1,160,0.0012,all,mohri|rai|mustard,,,1
+ajwain,🌿,Ajwain,अजवाइन,ओवा,spice,dry,Y1,pantry,kg,0.05,480,0.0003,all,ajwain|ova|owa|carom,,,1
+garam_masala,🟤,Goda masala,गोडा मसाला,गोडा मसाला,spice,dry,M6,pantry,kg,0.1,520,0.0008,all,goda masala|garam masala|masala,,,1
+milk,🥛,Milk,दूध,दूध,dairy,liquid,D1,fridge,L,0.5,56,0.22,all,milk|doodh|dudh|gokul|amul taaza|katraj,,,1
+curd,🥣,Curd,दही,दही,dairy,wet,D3,fridge,kg,0.4,90,0.05,all,curd|dahi|yogurt,,,1
+paneer,🧀,Paneer,पनीर,पनीर,dairy,wet,D5,fridge,kg,0.2,420,0.008,all,paneer|cottage cheese,,,1
+butter,🧈,Butter,मक्खन,लोणी,dairy,wet,M1,fridge,kg,0.1,560,0.002,all,butter|amul butter|loni,,,1
+eggs,🥚,Eggs,अंडे,अंडी,egg,wet,D15,fridge,pc,6,7.5,0.35,egg,egg|anda|andi,0.05,,1
+bread,🍞,Bread,ब्रेड,पाव,bakery,dry,D3,pantry,pc,1,45,0.06,all,bread|brown bread|britannia|modern,0.4,,1
+onion,🧅,Onion,प्याज़,कांदा,veg,fresh,D15,pantry,kg,0.5,38,0.055,nojain,onion|kanda|pyaz|pyaj,,,1
+potato,🥔,Potato,आलू,बटाटा,veg,fresh,D15,pantry,kg,0.5,34,0.05,nojain,potato|batata|aloo|alu,,,1
+garlic,🧄,Garlic,लहसुन,लसूण,veg,fresh,D15,pantry,kg,0.1,240,0.003,nojain,garlic|lasun|lehsun,,,1
+ginger,🫚,Ginger,अदरक,आले,veg,fresh,D15,fridge,kg,0.1,160,0.003,nojain,ginger|adrak|aale|ale,,,1
+tomato,🍅,Tomato,टमाटर,टोमॅटो,veg,fresh,D5,pantry,kg,0.5,40,0.045,all,tomato|tamatar|tometo|hybrid tomato,,,1
+green_chilli,🌶️,Green chilli,हरी मिर्च,हिरवी मिरची,veg,fresh,D8,fridge,kg,0.1,80,0.004,all,green chilli|mirchi|hirvi mirchi,,,1
+lemon,🍋,Lemon,नींबू,लिंबू,veg,fresh,D8,pantry,pc,4,6,0.15,all,lemon|nimbu|limbu|lime,0.05,,1
+coriander,🌿,Coriander,धनिया,कोथिंबीर,leafy,fresh,D3,fridge,pc,1,20,0.12,all,coriander|kothimbir|dhaniya|cilantro,0.1,,1
+curry_leaves,🍃,Curry leaves,कढ़ी पत्ता,कढीपत्ता,leafy,fresh,D8,fridge,pc,1,10,0.05,all,curry leaves|kadhipatta|kadipatta,0.03,,1
+palak,🥬,Palak (spinach),पालक,पालक,leafy,fresh,D3,fridge,pc,1,25,0.1,all,palak|spinach,0.25,,1
+methi,🌿,Methi,मेथी,मेथी,leafy,fresh,D3,fridge,pc,1,20,0.08,all,methi|fenugreek,0.2,,1
+cabbage,🥬,Cabbage,पत्ता गोभी,कोबी,veg,fresh,D8,fridge,kg,0.5,36,0.025,all,cabbage|kobi|patta gobhi,,,1
+cauliflower,🥦,Cauliflower,फूलगोभी,फ्लॉवर,veg,fresh,D5,fridge,pc,1,40,0.06,all,cauliflower|flower|gobhi|phool gobi,0.6,,1
+brinjal,🍆,Brinjal,बैंगन,वांगी,veg,fresh,D5,pantry,kg,0.25,60,0.022,all,brinjal|vangi|vange|baingan|bharit,,,1
+bhindi,🫛,Bhindi,भिंडी,भेंडी,veg,fresh,D3,fridge,kg,0.25,70,0.02,all,bhindi|bhendi|okra|ladyfinger,,,1
+capsicum,🫑,Capsicum,शिमला मिर्च,ढोबळी मिरची,veg,fresh,D8,fridge,kg,0.25,80,0.01,all,capsicum|shimla mirch|dhobli mirchi,,,1
+carrot,🥕,Carrot,गाजर,गाजर,veg,fresh,D8,fridge,kg,0.25,50,0.014,nojain,carrot|gajar,,,1
+cucumber,🥒,Cucumber,खीरा,काकडी,veg,fresh,D5,fridge,kg,0.25,40,0.02,all,cucumber|kakdi|kheera,,,1
+bottle_gourd,🥒,Dudhi (bottle gourd),लौकी,दुधी भोपळा,veg,fresh,D8,pantry,pc,1,40,0.08,all,dudhi|lauki|bottle gourd,0.8,,1
+green_peas,🟢,Green peas,हरी मटर,मटार,veg,fresh,D5,fridge,kg,0.25,90,0.01,all,peas|matar|vatana,,,1
+banana,🍌,Banana,केला,केळी,fruit,fresh,D5,pantry,pc,6,5,0.45,all,banana|kela|keli|kele,0.12,,1
+apple,🍎,Apple,सेब,सफरचंद,fruit,fresh,D15,fridge,kg,0.5,180,0.02,all,apple|seb|safarchand,,,1
+papaya,🍈,Papaya,पपीता,पपई,fruit,fresh,D3,pantry,kg,1,40,0.04,all,papaya|papai|papita,,,1
+maida,🌾,Maida,मैदा,मैदा,flour,dry,M2,pantry,kg,0.5,50,0.004,all,maida|refined flour,,,0
+rice_flour,🌾,Rice flour,चावल का आटा,तांदळाचे पीठ,flour,dry,M2,pantry,kg,0.5,60,0.004,all,rice flour|tandul pith|chawal atta,,,0
+nachni_flour,🫓,Ragi flour (nachni),रागी का आटा,नाचणीचे पीठ,flour,dry,M1,pantry,kg,0.5,80,0.005,all,ragi|nachni|nachni pith,,,0
+dalia,🥣,Dalia (broken wheat),दलिया,दलिया,grain,dry,M2,pantry,kg,0.5,56,0.006,all,dalia|daliya|broken wheat|lapsi,,,0
+oats,🥣,Oats,ओट्स,ओट्स,grain,dry,M6,pantry,kg,0.5,190,0.005,all,oats|rolled oats|quaker,,,0
+vermicelli,🍜,Vermicelli (shevaya),सेंवई,शेवया,grain,dry,M6,pantry,kg,0.2,120,0.003,all,vermicelli|sevai|shevaya|semiya,,,0
+murmura,🍚,Murmura (puffed rice),मुरमुरे,चुरमुरे,grain,dry,M1,pantry,kg,0.25,90,0.004,all,murmura|kurmura|churmure|puffed rice,,,0
+urad_dal,🫘,Urad dal,उड़द दाल,उडीद डाळ,pulse,dry,Y1,pantry,kg,0.5,140,0.006,all,urad|udid|urad dal,,,0
+kabuli_chana,🫘,Kabuli chana,काबुली चना,काबुली चणे,pulse,dry,Y1,pantry,kg,0.5,130,0.006,all,kabuli|chole|chickpea,,,0
+kala_chana,🫘,Kala chana,काला चना,काळे चणे,pulse,dry,Y1,pantry,kg,0.5,100,0.005,all,kala chana|black chana|kale chane,,,0
+rajma,🫘,Rajma,राजमा,राजमा,pulse,dry,Y1,pantry,kg,0.5,150,0.005,all,rajma|kidney beans,,,0
+whole_moong,🫘,Whole moong,साबुत मूंग,हिरवे मूग,pulse,dry,Y1,pantry,kg,0.5,130,0.005,all,green moong|whole moong|sabut moong|hirve mug,,,0
+chavli,🫘,Chavli (lobia),लोबिया,चवळी,pulse,dry,Y1,pantry,kg,0.5,120,0.004,all,chavli|lobia|black eyed beans,,,0
+white_vatana,🫘,Dried white peas,सफेद मटर,पांढरे वाटाणे,pulse,dry,Y1,pantry,kg,0.5,90,0.004,all,safed matar|white peas|pandhre vatane|safed vatana,,,0
+soya_chunks,🫘,Soya chunks,सोया चंक्स,सोया चंक्स,pulse,dry,M6,pantry,kg,0.2,140,0.003,all,soya|nutrela|soya chunks,,,0
+dry_coconut,🥥,Dry coconut (khobra),सूखा नारियल,सुके खोबरे,misc,dry,M2,pantry,kg,0.25,280,0.002,all,khobra|copra|dry coconut|sukha khobra,,,0
+sesame,🌰,Sesame (til),तिल,तीळ,spice,dry,M6,pantry,kg,0.1,260,0.0008,all,til|teel|sesame,,,0
+coriander_powder,🌿,Coriander powder,धनिया पाउडर,धणे पूड,spice,dry,M6,pantry,kg,0.1,240,0.0012,all,dhania powder|dhane pud|coriander powder|dhana jeera,,,0
+hing,🌿,Hing (asafoetida),हींग,हिंग,spice,dry,Y1,pantry,kg,0.05,1800,0.0001,all,hing|asafoetida,,,0
+black_pepper,🌿,Black pepper,काली मिर्च,काळी मिरी,spice,dry,Y1,pantry,kg,0.05,900,0.0002,all,kali mirch|miri|pepper,,,0
+cardamom,🌿,Cardamom (elaichi),इलायची,वेलची,spice,dry,Y1,pantry,kg,0.025,3000,0.00005,all,elaichi|velchi|cardamom,,,0
+cloves,🌿,Cloves,लौंग,लवंग,spice,dry,Y1,pantry,kg,0.025,1400,0.00005,all,laung|lavang|cloves,,,0
+cinnamon,🌿,Cinnamon,दालचीनी,दालचिनी,spice,dry,Y1,pantry,kg,0.05,800,0.00005,all,dalchini|cinnamon,,,0
+tej_patta,🌿,Bay leaf,तेज पत्ता,तमालपत्र,spice,dry,Y1,pantry,kg,0.025,400,0.00003,all,tej patta|tamalpatra|bay leaf,,,0
+methi_seeds,🌿,Methi seeds,मेथी दाना,मेथी दाणे,spice,dry,Y1,pantry,kg,0.1,140,0.0002,all,methi dana|methi seeds|fenugreek seeds,,,0
+kasuri_methi,🌿,Kasuri methi,कसूरी मेथी,कसुरी मेथी,spice,dry,M6,pantry,kg,0.05,600,0.0001,all,kasuri methi|dried methi,,,0
+fennel,🌿,Saunf (fennel),सौंफ,बडीशेप,spice,dry,Y1,pantry,kg,0.1,300,0.0003,all,saunf|badishep|fennel,,,0
+dry_red_chilli,🌶️,Dry red chilli,सूखी लाल मिर्च,सुकी लाल मिरची,spice,dry,Y1,pantry,kg,0.1,350,0.0003,all,sukhi mirchi|dry chilli|dry red chilli|byadgi|suki mirchi,,,0
+kanda_lasun_masala,🌶️,Kanda lasun masala,कांदा लहसुन मसाला,कांदा लसूण मसाला,spice,dry,M6,pantry,kg,0.1,500,0.0006,nojain,kanda lasun masala|kanda lasun,,,0
+sambar_masala,🌶️,Sambar masala,सांभर मसाला,सांबार मसाला,spice,dry,M6,pantry,kg,0.1,460,0.0004,all,sambar masala,,,0
+pav_bhaji_masala,🌶️,Pav bhaji masala,पाव भाजी मसाला,पावभाजी मसाला,spice,dry,M6,pantry,kg,0.1,480,0.0003,all,pav bhaji masala,,,0
+tamarind,🌰,Tamarind,इमली,चिंच,spice,dry,Y1,pantry,kg,0.25,200,0.0008,all,imli|chinch|tamarind,,,0
+kokum,🌰,Kokum,कोकम,कोकम,spice,dry,Y1,pantry,kg,0.1,400,0.0003,all,kokum|amsul,,,0
+sendha_namak,🧂,Rock salt,सेंधा नमक,सैंधव मीठ,misc,dry,Y1,pantry,kg,0.5,60,0.0005,all,sendha namak|rock salt|saindhav,,,0
+baking_soda,🧂,Baking soda,खाने का सोडा,खाण्याचा सोडा,misc,dry,Y1,pantry,kg,0.1,100,0.0001,all,baking soda|khane ka soda|khanyacha soda,,,0
+sunflower_oil,🫗,Sunflower oil,सूरजमुखी तेल,सूर्यफूल तेल,oil,liquid,M6,pantry,L,1,150,0.02,all,sunflower|sunflower oil|refined|fortune|saffola,,,0
+mustard_oil,🫗,Mustard oil,सरसों का तेल,मोहरीचे तेल,oil,liquid,M6,pantry,L,1,180,0.01,all,sarson|mustard oil|kachi ghani,,,0
+coffee,☕,Coffee powder,कॉफ़ी,कॉफी,misc,dry,M6,pantry,kg,0.1,900,0.0008,all,coffee|nescafe|bru,,,0
+honey,🍯,Honey,शहद,मध,misc,liquid,Y1,pantry,kg,0.25,500,0.0008,all,honey|shahad|madh,,,0
+pickle,🫙,Pickle (lonche),अचार,लोणचे,packaged,wet,M6,pantry,kg,0.25,280,0.002,all,achar|lonche|pickle,,,0
+papad,🫓,Papad,पापड़,पापड,packaged,dry,M6,pantry,kg,0.2,300,0.001,all,papad|papadum,,,0
+tomato_ketchup,🥫,Tomato ketchup,टमाटर सॉस,टोमॅटो सॉस,packaged,wet,M2,fridge,kg,0.5,220,0.002,all,ketchup|tomato sauce|kissan,,,0
+jam,🫙,Jam,जैम,जॅम,packaged,wet,M2,fridge,kg,0.5,300,0.001,all,jam|mixed fruit jam,,,0
+tomato_puree,🥫,Tomato puree,टमाटर प्यूरी,टोमॅटो प्युरी,packaged,wet,M6,pantry,kg,0.2,80,0.001,all,puree|tomato puree,,,0
+ginger_garlic_paste,🫙,Ginger-garlic paste,अदरक लहसुन पेस्ट,आले लसूण पेस्ट,packaged,wet,M1,fridge,kg,0.2,250,0.001,nojain,ginger garlic paste|gg paste|adrak lehsun paste,,,0
+biscuits,🍪,Biscuits,बिस्कुट,बिस्किटे,packaged,dry,M2,pantry,pc,2,30,0.12,all,biscuit|parle|good day|marie|bourbon,0.12,pack|packs,0
+instant_noodles,🍜,Instant noodles,मैगी,मॅगी,packaged,dry,M6,pantry,pc,4,14,0.08,all,maggi|noodles|yippee,0.07,pack|packs,0
+pasta,🍝,Pasta,पास्ता,पास्ता,packaged,dry,M6,pantry,kg,0.5,160,0.002,all,pasta|macaroni,,,0
+cornflakes,🥣,Cornflakes,कॉर्नफ्लेक्स,कॉर्नफ्लेक्स,packaged,dry,M2,pantry,kg,0.5,280,0.004,all,cornflakes|kelloggs|chocos,,,0
+namkeen,🥨,Namkeen / chivda,नमकीन,चिवडा,packaged,dry,M1,pantry,kg,0.2,260,0.004,all,namkeen|farsan|bhujia|chakli|shev,,,0
+juice,🧃,Packaged juice,जूस,ज्यूस,packaged,liquid,M2,pantry,L,1,110,0.01,all,juice|real juice|tropicana,,,0
+idli_batter,🥣,Idli / dosa batter,इडली का घोल,इडलीचे पीठ (ओले),packaged,wet,D3,fridge,kg,1,90,0.02,all,idli batter|dosa batter|batter,,,0
+pav,🍞,Pav,पाव,पाव,bakery,dry,D3,pantry,pc,6,5,0.3,all,pav|pao|ladi pav|bun,0.04,pav|pav,0
+rusk,🍞,Toast / rusk,रस्क,टोस्ट,bakery,dry,M1,pantry,pc,1,60,0.06,all,rusk|toast|khari,0.2,pack|packs,0
+buttermilk,🥛,Buttermilk (taak),छाछ,ताक,dairy,liquid,D1,fridge,L,0.5,40,0.05,all,chaas|taak|tak|buttermilk,,,0
+cheese,🧀,Cheese,चीज़,चीज,dairy,wet,M1,fridge,kg,0.2,550,0.001,all,cheese|cheese slices|amul cheese,,,0
+cream,🥛,Fresh cream (malai),मलाई,साय,dairy,wet,D5,fridge,kg,0.2,300,0.001,all,cream|malai|fresh cream,,,0
+shrikhand,🍮,Shrikhand,श्रीखंड,श्रीखंड,dairy,wet,D5,fridge,kg,0.25,400,0.002,all,shrikhand|amrakhand,,,0
+chicken,🍗,Chicken,चिकन,चिकन,meat,wet,D1,fridge,kg,0.5,240,0.03,meat,chicken|murgi|kombdi,,,0
+fish,🐟,Fish,मछली,मासे,meat,wet,D1,fridge,kg,0.5,600,0.015,meat,fish|machhi|mase|pomfret|surmai|bangda,,,0
+mutton,🍖,Mutton,मटन,मटण,meat,wet,D1,fridge,kg,0.5,800,0.01,meat,mutton|bakra,,,0
+prawns,🦐,Prawns,झींगा,कोळंबी,meat,wet,D1,fridge,kg,0.25,600,0.005,meat,prawns|kolambi|jhinga,,,0
+moong_sprouts,🌱,Moong sprouts,अंकुरित मूंग,मोड आलेले मूग,veg,fresh,D3,fridge,kg,0.25,120,0.006,all,sprouts|ankurit|mod aalele,,,0
+spring_onion,🧅,Spring onion,हरा प्याज़,कांद्याची पात,leafy,fresh,D3,fridge,pc,1,20,0.03,nojain,spring onion|kandyachi paat|hara pyaz,0.15,,0
+pudina,🌿,Mint (pudina),पुदीना,पुदिना,leafy,fresh,D3,fridge,pc,1,10,0.03,all,pudina|mint,0.05,,0
+shepu,🌿,Shepu (dill),सोआ,शेपू,leafy,fresh,D3,fridge,pc,1,20,0.03,all,shepu|dill|suva,0.15,,0
+lal_math,🥬,Red amaranth (lal math),लाल चौलाई,लाल माठ,leafy,fresh,D3,fridge,pc,1,20,0.03,all,lal math|chaulai|amaranth|math,0.2,,0
+ridge_gourd,🥒,Ridge gourd,तुरई,दोडका,veg,fresh,D5,fridge,kg,0.25,60,0.012,all,dodka|turai|ridge gourd,,,0
+karela,🥒,Bitter gourd,करेला,कारले,veg,fresh,D5,fridge,kg,0.25,70,0.008,all,karela|karle|bitter gourd,,,0
+tondli,🥒,Tondli (ivy gourd),कुंदरू,तोंडली,veg,fresh,D5,fridge,kg,0.25,70,0.01,all,tondli|tindora|kundru|ivy gourd,,,0
+french_beans,🫛,French beans,फ्रेंच बीन्स,फरसबी,veg,fresh,D5,fridge,kg,0.25,90,0.012,all,beans|farasbi|french beans,,,0
+gavar,🫛,Cluster beans (gavar),ग्वार फली,गवार,veg,fresh,D5,fridge,kg,0.25,90,0.008,all,gavar|guar|cluster beans,,,0
+drumstick,🫛,Drumstick,सहजन,शेवग्याच्या शेंगा,veg,fresh,D5,fridge,pc,4,10,0.15,all,drumstick|shevga|sahjan|shevgyachya shenga,0.05,,0
+pumpkin,🎃,Red pumpkin,कद्दू,लाल भोपळा,veg,fresh,D15,pantry,kg,0.5,40,0.012,all,pumpkin|bhopla|kaddu|lal bhopla,,,0
+sweet_potato,🍠,Sweet potato,शकरकंद,रताळे,veg,fresh,D15,pantry,kg,0.5,60,0.008,nojain,ratale|shakarkand|sweet potato,,,0
+beetroot,🫜,Beetroot,चुकंदर,बीट,veg,fresh,D8,fridge,kg,0.25,50,0.008,nojain,beet|beetroot|chukandar,,,0
+radish,🥕,Radish (mooli),मूली,मुळा,veg,fresh,D5,fridge,kg,0.25,40,0.008,nojain,mooli|mula|radish,,,0
+raw_banana,🍌,Raw banana,कच्चा केला,कच्ची केळी,veg,fresh,D5,pantry,pc,4,8,0.08,all,kachcha kela|raw banana|kachchi keli,0.15,,0
+corn,🌽,Sweet corn,मक्का,मका,veg,fresh,D3,fridge,pc,2,25,0.06,all,corn|bhutta|makka|maka,0.3,,0
+mushroom,🍄,Mushroom,मशरूम,मशरूम,veg,fresh,D3,fridge,kg,0.2,250,0.005,all,mushroom,,,0
+coconut,🥥,Fresh coconut,नारियल,ओला नारळ,veg,fresh,D15,pantry,pc,1,40,0.06,all,coconut|naral|nariyal|ola naral,0.5,,0
+mango,🥭,Mango,आम,आंबा,fruit,fresh,D5,pantry,pc,6,25,0.1,all,mango|aam|amba|hapus|alphonso|kesar,0.25,,0
+orange,🍊,Orange,संतरा,संत्री,fruit,fresh,D15,fridge,kg,1,80,0.03,all,orange|santra|santre,,,0
+sweet_lime,🍋,Sweet lime (mosambi),मौसमी,मोसंबी,fruit,fresh,D15,fridge,kg,1,70,0.02,all,mosambi|sweet lime,,,0
+grapes,🍇,Grapes,अंगूर,द्राक्षे,fruit,fresh,D5,fridge,kg,0.5,100,0.015,all,grapes|angoor|draksha|drakshe,,,0
+pomegranate,🍎,Pomegranate,अनार,डाळिंब,fruit,fresh,D15,fridge,kg,0.5,160,0.015,all,anar|dalimb|pomegranate,,,0
+guava,🍐,Guava,अमरूद,पेरू,fruit,fresh,D5,pantry,kg,0.5,80,0.015,all,peru|amrood|guava,,,0
+chikoo,🥔,Chikoo,चीकू,चिकू,fruit,fresh,D3,pantry,kg,0.5,80,0.012,all,chikoo|chiku|sapota,,,0
+watermelon,🍉,Watermelon,तरबूज,कलिंगड,fruit,fresh,D8,pantry,pc,1,60,0.08,all,watermelon|kalingad|tarbooj,3,,0
+amla,🫒,Amla,आंवला,आवळा,fruit,fresh,D8,fridge,kg,0.25,80,0.004,all,amla|awla|avla|gooseberry,,,0
+dates,🌰,Dates (khajur),खजूर,खजूर,nuts,dry,M6,pantry,kg,0.25,300,0.002,all,khajur|dates,,,0
+almonds,🌰,Almonds,बादाम,बदाम,nuts,dry,M6,pantry,kg,0.1,900,0.001,all,badam|almond,,,0
+cashews,🌰,Cashews,काजू,काजू,nuts,dry,M6,pantry,kg,0.1,950,0.0008,all,kaju|cashew,,,0
+raisins,🍇,Raisins,किशमिश,मनुका,nuts,dry,M6,pantry,kg,0.1,400,0.0005,all,kishmish|manuka|bedana|raisins,,,0
+makhana,🌰,Makhana,मखाना,मखाणा,nuts,dry,M6,pantry,kg,0.1,1000,0.0004,all,makhana|fox nut,,,0

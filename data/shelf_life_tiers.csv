@@ -1,0 +1,10 @@
+tier,label,min_days,max_days,examples,source
+Y1,Keeps about a year,270,365,"rice, whole dals, salt, sugar",FSSAI shelf-life guidance for dry staples; homemaker insight
+M6,Keeps about 6 months,150,180,"oil, ghee, spices, tea, peanuts",FSSAI / pack best-before ranges
+M2,Keeps about 2 months,45,60,"wheat atta, besan, rava, poha",Mill and brand best-before ranges
+M1,Keeps about a month,25,35,"jowar and bajra flour, butter",Millet flours turn rancid faster (high fat)
+D15,Keeps about 15 days,12,18,"onion, potato, garlic, ginger, eggs, apples",USDA FoodKeeper (room / fridge)
+D8,Keeps about a week,6,9,"cabbage, capsicum, carrot, green chilli, lemon",USDA FoodKeeper (fridge)
+D5,Keeps 4-6 days,4,6,"tomato, brinjal, cauliflower, banana, paneer",USDA FoodKeeper; homemaker insight
+D3,Keeps 2-3 days,2,3,"palak, methi, coriander, curd, bread, bhindi",USDA FoodKeeper (leafy greens 3-5 days in fridge; stricter used)
+D1,Keeps 1-2 days,1,2,"pouch milk (boiled, refrigerated)",FSSAI pasteurised milk guidance

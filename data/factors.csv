@@ -1,0 +1,17 @@
+kind,key,factor,note
+storage,fresh:fridge,1.0,Tier values assume the usual storage for the item
+storage,fresh:pantry_when_fridge_default,0.6,Fridge items left out spoil faster
+storage,fresh:fridge_when_pantry_default,1.4,Fridge extends room-temperature produce (not onion/potato)
+storage,dry:airtight,1.2,Airtight dabba slows staling and pests
+weather,hot_35,0.7,Room-stored fresh food at 35°C or more
+weather,hot_30,0.8,Room-stored fresh food at 30-35°C
+weather,warm_25,0.9,Room-stored fresh food at 25-30°C
+weather,humid_75,0.85,Dry goods in humidity at 75% or more (moisture and pests)
+member,adult,1.0,Adult portion
+member,elder,0.85,Elders usually eat a little less
+member,teen,1.1,Teenagers eat more
+member,child,0.6,Children 5-12
+member,toddler,0.3,Under 5
+portion,light,0.85,Light eaters
+portion,normal,1.0,Normal portions
+portion,hearty,1.15,Hearty eaters

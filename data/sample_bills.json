@@ -1,0 +1,66 @@
+[
+  {
+    "id": "ganesh_kirana_oct24",
+    "shop": "Shree Ganesh Kirana Stores",
+    "address": "Karve Road, Kothrud, Pune 411038",
+    "bill_no": "GK/2410/0187",
+    "date_offset_days": 0,
+    "source": "paper",
+    "lines": [
+      {"raw": "TOMATO HYBRID        2.000 KG   80.00", "item_id": "tomato", "qty": 2, "unit": "kg", "price": 80},
+      {"raw": "KANDA (ONION)        3.000 KG  114.00", "item_id": "onion", "qty": 3, "unit": "kg", "price": 114},
+      {"raw": "BATATA               2.000 KG   68.00", "item_id": "potato", "qty": 2, "unit": "kg", "price": 68},
+      {"raw": "PALAK JUDI           3 NOS      75.00", "item_id": "palak", "qty": 3, "unit": "pc", "price": 75},
+      {"raw": "METHI JUDI           2 NOS      40.00", "item_id": "methi", "qty": 2, "unit": "pc", "price": 40},
+      {"raw": "KOTHIMBIR            2 NOS      40.00", "item_id": "coriander", "qty": 2, "unit": "pc", "price": 40},
+      {"raw": "HIRVI MIRCHI         0.250 KG   20.00", "item_id": "green_chilli", "qty": 0.25, "unit": "kg", "price": 20},
+      {"raw": "VANGI (BRINJAL)      1.000 KG   60.00", "item_id": "brinjal", "qty": 1, "unit": "kg", "price": 60},
+      {"raw": "FLOWER               2 NOS      80.00", "item_id": "cauliflower", "qty": 2, "unit": "pc", "price": 80},
+      {"raw": "GOKUL MILK 500ML x10 10 PKT    280.00", "item_id": "milk", "qty": 5, "unit": "L", "price": 280},
+      {"raw": "CHITALE DAHI 400G    2 PKT     180.00", "item_id": "curd", "qty": 0.8, "unit": "kg", "price": 180},
+      {"raw": "PANEER LOOSE         0.400 KG  168.00", "item_id": "paneer", "qty": 0.4, "unit": "kg", "price": 168},
+      {"raw": "KELI (BANANA)        2 DZN     120.00", "item_id": "banana", "qty": 24, "unit": "pc", "price": 120},
+      {"raw": "MODERN BREAD 400G    2 NOS      90.00", "item_id": "bread", "qty": 2, "unit": "pc", "price": 90},
+      {"raw": "AASHIRVAAD ATTA 5KG  1 BAG     240.00", "item_id": "wheat_atta", "qty": 5, "unit": "kg", "price": 240},
+      {"raw": "TOOR DAL             1.000 KG  158.00", "item_id": "toor_dal", "qty": 1, "unit": "kg", "price": 158},
+      {"raw": "POHE JADA            0.500 KG   32.00", "item_id": "poha", "qty": 0.5, "unit": "kg", "price": 32},
+      {"raw": "OVA (AJWAIN) 50G     1 PKT      24.00", "item_id": "ajwain", "qty": 0.05, "unit": "kg", "price": 24}
+    ]
+  },
+  {
+    "id": "blinkit_order_oct20",
+    "shop": "Quick-commerce order (screenshot)",
+    "address": "Order #BLK-88213",
+    "bill_no": "BLK-88213",
+    "date_offset_days": -4,
+    "source": "screenshot",
+    "lines": [
+      {"raw": "Fresh Bhindi (Okra) 250 g x 2", "item_id": "bhindi", "qty": 0.5, "unit": "kg", "price": 70},
+      {"raw": "Capsicum Green 250 g", "item_id": "capsicum", "qty": 0.25, "unit": "kg", "price": 20},
+      {"raw": "Carrot (Gajar) 500 g", "item_id": "carrot", "qty": 0.5, "unit": "kg", "price": 25},
+      {"raw": "Amul Butter 100 g", "item_id": "butter", "qty": 0.1, "unit": "kg", "price": 56},
+      {"raw": "Cucumber 500 g", "item_id": "cucumber", "qty": 0.5, "unit": "kg", "price": 20},
+      {"raw": "Papaya Semi Ripe ~1 kg", "item_id": "papaya", "qty": 1, "unit": "kg", "price": 40}
+    ]
+  },
+  {
+    "id": "patil_provision_oct10",
+    "shop": "Patil Provision Stores",
+    "address": "Paud Phata, Pune",
+    "bill_no": "PPS-1029",
+    "date_offset_days": -14,
+    "source": "paper",
+    "lines": [
+      {"raw": "INDRAYANI RICE 5KG", "item_id": "rice", "qty": 5, "unit": "kg", "price": 310},
+      {"raw": "FORTUNE GROUNDNUT OIL 1L x2", "item_id": "oil", "qty": 2, "unit": "L", "price": 380},
+      {"raw": "SAKHAR 2 KG", "item_id": "sugar", "qty": 2, "unit": "kg", "price": 92},
+      {"raw": "JWARI PITH 1KG", "item_id": "jowar_flour", "qty": 1, "unit": "kg", "price": 64},
+      {"raw": "BESAN 500G", "item_id": "besan", "qty": 0.5, "unit": "kg", "price": 48},
+      {"raw": "SHENGDANE 500G", "item_id": "peanuts", "qty": 0.5, "unit": "kg", "price": 75},
+      {"raw": "SOCIETY TEA 250G", "item_id": "tea", "qty": 0.25, "unit": "kg", "price": 140},
+      {"raw": "GOODA MASALA 100G", "item_id": "garam_masala", "qty": 0.1, "unit": "kg", "price": 52},
+      {"raw": "TATA SALT 1KG", "item_id": "salt", "qty": 1, "unit": "kg", "price": 28},
+      {"raw": "RAVA 500G", "item_id": "rava", "qty": 0.5, "unit": "kg", "price": 26}
+    ]
+  }
+]

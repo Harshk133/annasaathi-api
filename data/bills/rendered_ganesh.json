@@ -1,0 +1,77 @@
+{
+ "note": "Rendered from sample_bills.json (synthetic, not a real photo)",
+ "lines": [
+  {
+   "item_id": "tomato",
+   "qty": 2
+  },
+  {
+   "item_id": "onion",
+   "qty": 3
+  },
+  {
+   "item_id": "potato",
+   "qty": 2
+  },
+  {
+   "item_id": "palak",
+   "qty": 3
+  },
+  {
+   "item_id": "methi",
+   "qty": 2
+  },
+  {
+   "item_id": "coriander",
+   "qty": 2
+  },
+  {
+   "item_id": "green_chilli",
+   "qty": 0.25
+  },
+  {
+   "item_id": "brinjal",
+   "qty": 1
+  },
+  {
+   "item_id": "cauliflower",
+   "qty": 2
+  },
+  {
+   "item_id": "milk",
+   "qty": 5
+  },
+  {
+   "item_id": "curd",
+   "qty": 0.8
+  },
+  {
+   "item_id": "paneer",
+   "qty": 0.4
+  },
+  {
+   "item_id": "banana",
+   "qty": 24
+  },
+  {
+   "item_id": "bread",
+   "qty": 2
+  },
+  {
+   "item_id": "wheat_atta",
+   "qty": 5
+  },
+  {
+   "item_id": "toor_dal",
+   "qty": 1
+  },
+  {
+   "item_id": "poha",
+   "qty": 0.5
+  },
+  {
+   "item_id": "ajwain",
+   "qty": 0.05
+  }
+ ]
+}

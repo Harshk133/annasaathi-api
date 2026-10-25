@@ -1,0 +1,22 @@
+{
+  "family_name": "Patil",
+  "city": "Pune",
+  "lat": 18.5204,
+  "lon": 73.8567,
+  "language": "en",
+  "diet": "veg",
+  "portion": "normal",
+  "cooked_meals_per_day": 3,
+  "eat_out_meals_per_week": 2,
+  "shop_interval_days": 7,
+  "has_fridge": true,
+  "prep_styles": ["wet", "roasted"],
+  "members": [
+    {"name": "Sneha", "age": 38, "group": "adult", "note": "Works full-time; packs tiffins", "needs": []},
+    {"name": "Rahul", "age": 41, "group": "adult", "note": "Works full-time; travels Thursdays", "needs": []},
+    {"name": "Aaji", "age": 71, "group": "elder", "note": "Prefers roasted food; ajwain for digestion", "needs": ["ajwain", "roasted"]},
+    {"name": "Aarav", "age": 14, "group": "teen", "note": "Cricket practice, big appetite", "needs": []},
+    {"name": "Mira", "age": 8, "group": "child", "note": "Loves poha and banana", "needs": []}
+  ],
+  "seed_bills": ["patil_provision_oct10", "blinkit_order_oct20"]
+}

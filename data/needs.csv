@@ -1,0 +1,6 @@
+id,label,kind,target,boost
+ajwain,Ajwain for digestion,item,ajwain,1.5
+extra_milk,Glass of milk every day,item,milk,1.0
+fruit_daily,Fruit every day,item,banana,1.0
+roasted,Prefers roasted food,prep_like,roasted,
+no_fried,Avoids fried food,prep_avoid,fried,
