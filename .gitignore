@@ -1,0 +1,7 @@
+# Secrets and local data: never commit
+.env
+anna.db
+data/sim_cache.json
+__pycache__/
+*.pyc
+.pytest_cache/
