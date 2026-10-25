@@ -215,6 +215,17 @@ def _scan_result(bill_id: str, shop: str, source: str, mode: str, lines: list[di
             "total": round(sum(l.get("price") or 0 for l in enriched))}
 
 
+def sniff_image(data: bytes) -> str | None:
+    """The image type from the file's first bytes: phones don't always label uploads."""
+    if data[:3] == b"\xff\xd8\xff":
+        return "image/jpeg"
+    if data[:8] == b"\x89PNG\r\n\x1a\n":
+        return "image/png"
+    if data[:4] == b"RIFF" and data[8:12] == b"WEBP":
+        return "image/webp"
+    return None
+
+
 def photo_reader() -> str | None:
     """Which service reads bill photos: Claude vision if configured, else OCR.space, else none."""
     if os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN"):
@@ -247,7 +258,7 @@ async def scan_bill(file: UploadFile | None = File(None), sample_id: str | None 
             raise HTTPException(413, "photo is too large (over 12 MB)")
         # the same photo always gets the same id, so importing it twice replaces instead of doubling
         bill_id = f"photo_{hashlib.sha1(data).hexdigest()[:12]}"
-        media = file.content_type or "image/jpeg"
+        media = sniff_image(data) or file.content_type or "image/jpeg"
         reader = photo_reader()
         try:
             if reader == "claude":

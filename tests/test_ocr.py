@@ -148,3 +148,11 @@ def test_prices_matched_by_position_are_flagged_for_review(api, monkeypatch):
     r = photo(api).json()
     flagged = {l["item_id"] for l in r["lines"] if l["needs_review"]}
     assert flagged == {"potato", "cauliflower"}  # the two rows OCR split; everything else read cleanly
+
+
+def test_unlabelled_upload_is_recognised_by_its_bytes(api, monkeypatch):
+    calls = ocr_replies(monkeypatch, ok_body())
+    png = b"\x89PNG\r\n\x1a\n" + b"0" * 32
+    r = api.post("/api/bills/scan", files={"file": ("blob", png, "application/octet-stream")})
+    assert r.json()["mode"] == "ocr"
+    assert calls[0]["files"]["file"][2] == "image/png"
