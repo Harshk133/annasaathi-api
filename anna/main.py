@@ -11,10 +11,10 @@ from typing import Literal
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 from . import env  # noqa: F401  (loads api/.env before anything reads the environment)
-from . import db, engine, extract, household, ocr, planner, simulator, weather
+from . import db, engine, extract, guests, household, llm, occasions, ocr, planner, simulator, videos, weather
 from .data import catalogue, cooked_tiers, fmt_qty, fmt_rate, recipes, sample_bills, tiers
 
 app = FastAPI(title="AnnaSaathi API", version="0.1.0")
@@ -50,7 +50,7 @@ def item_card(item_id: str, c: engine.Ctx) -> dict:
 @app.get("/api/health")
 def health():
     """For the host's health check: cheap, touches no external service."""
-    return {"ok": True, "today": today().isoformat(), "photo_reader": photo_reader()}
+    return {"ok": True, "today": today().isoformat(), "photo_reader": photo_reader(), "ai_recipes": llm.configured()}
 
 
 # ---------------------------------------------------------------- household
@@ -738,6 +738,104 @@ def waste_log():
     with db.connect() as con:
         rows = [dict(r) for r in con.execute("SELECT * FROM waste_log ORDER BY id DESC")]
     return {"rows": rows, "kg": round(sum(r["kg"] for r in rows), 2), "rupees": round(sum(r["rupees"] for r in rows))}
+
+
+# ---------------------------------------------------------------- guests coming
+
+class GuestsIn(BaseModel):
+    adults: int = Field(default=0, ge=0, le=50)
+    minors: int = Field(default=0, ge=0, le=50)
+    conditions: list[str] = []  # health needs any guest has (planning only)
+    meal: Literal["breakfast", "lunch", "dinner", "snack"] = "dinner"
+    include_family: bool = True
+    selected: list[str] | None = None  # recipe ids the family picked; default: the best-covered two
+
+    @model_validator(mode="after")
+    def _someone(self):
+        from .occasions import conditions
+
+        if self.adults + self.minors == 0:
+            raise ValueError("add at least one guest")
+        unknown = [c for c in self.conditions if c not in conditions()]
+        if unknown:
+            raise ValueError(f"unknown health conditions: {', '.join(unknown)}")
+        return self
+
+
+def _guest_context(body: GuestsIn):
+    with db.connect() as con:
+        c = ctx(con)
+        inv = engine.inventory(db.get_lots(con), c)
+    ae, heads = guests.people(c.household, body.adults, body.minors, body.include_family)
+    conds = guests.everyone_conditions(c.household, body.conditions, body.include_family)
+    return c, inv, ae, heads, conds
+
+
+@app.post("/api/guests/plan")
+def guests_plan(body: GuestsIn):
+    """A meal for the family and guests from what's in the kitchen, with recipe videos,
+    and only the missing items to buy."""
+    c, inv, ae, heads, conds = _guest_context(body)
+    menu = guests.suggest_menu(inv, c, body.meal, ae, conds)
+    by_id = {d["recipe_id"]: d for d in menu}
+    if body.selected:
+        stock = {r["item_id"]: r["remaining"] for r in inv if r["status"] not in ("finished", "spoiled")}
+        at_risk = {r["item_id"]: r["at_risk"] for r in inv}
+        for rid in body.selected:  # a dish picked earlier may have dropped out of the top list
+            if rid not in by_id:
+                r = next((r for r in recipes() if r["id"] == rid), None)
+                if r:
+                    by_id[rid] = guests.dish_card(r, ae, stock, at_risk, conds)
+                    menu.append(by_id[rid])
+        selected = [rid for rid in body.selected if rid in by_id]
+    else:
+        selected = [d["recipe_id"] for d in menu[:2]]
+    vids = videos.recipe_videos([d["name_en"] for d in menu])
+    for d in menu:
+        d["video"] = vids.get(d["name_en"])
+        d["to_buy"] = guests.shortfall([d])
+    to_buy = guests.shortfall([by_id[i] for i in selected])
+    return {
+        "people": {"adults": body.adults, "minors": body.minors, "heads": heads, "adult_equivalents": round(ae, 1),
+                   "family": len(c.household["members"]) if body.include_family else 0},
+        "health": [occasions.conditions()[x]["label_en"] for x in sorted(conds)],
+        "meal": body.meal, "dishes": menu, "selected": selected,
+        "to_buy": to_buy, "to_buy_rupees": sum(x["price"] for x in to_buy),
+        "ai_available": llm.configured(),
+    }
+
+
+@app.post("/api/guests/ideas")
+def guests_ideas(body: GuestsIn):
+    """More dish ideas from an LLM (OpenRouter), checked against the kitchen by our own code."""
+    if not llm.configured():
+        raise HTTPException(503, {"code": "no_ai", "message": "AI recipe ideas need an OpenRouter key on the server."})
+    c, inv, ae, heads, conds = _guest_context(body)
+    kitchen = [f"{r['name_en']}: {r['remaining_label']}" for r in inv if r["status"] not in ("finished", "spoiled")]
+    avoid = sorted({p for x in conds for rule in occasions.health_rules().get(x, [])
+                    if rule["effect"] == "avoid_prep" for p in rule["items"]})
+    care = [f"{occasions.conditions()[x]['label_en']} (avoid foods {', '.join(sorted({r['note'] for r in occasions.health_rules()[x] if r['effect'] == 'flag'}))})"
+            for x in sorted(conds)]
+    try:
+        raw = llm.ideas(kitchen, heads, body.meal, c.household.get("diet", "veg"), avoid, care)
+    except extract.ExtractionUnavailable as e:
+        raise HTTPException(502, {"code": "ai_failed", "message": f"Couldn't get AI ideas: {e}."}) from e
+    stock = {r["item_id"]: r["remaining"] for r in inv if r["status"] not in ("finished", "spoiled")}
+    at_risk = {r["item_id"]: r["at_risk"] for r in inv}
+    cards = []
+    for i, d in enumerate(raw):
+        known = {g["item_id"]: g["per_person"] for g in d["ingredients"] if g["item_id"]}
+        recipe = {"id": f"ai_{i}", "name_en": d["name"], "name_hi": d["name"], "name_mr": d["name"], "prep": "ai",
+                  "meal": body.meal, "time_min": d["time_min"] or 30, "steps": d["steps"], "ingredients": known}
+        card = guests.dish_card(recipe, ae, stock, at_risk, conds)
+        card.update({"source": "ai", "why": d["why"], "other_ingredients": [g["name"] for g in d["ingredients"] if not g["item_id"]],
+                     "to_buy": guests.shortfall([card])})
+        cards.append(card)
+    vids = videos.recipe_videos([d["name_en"] for d in cards])
+    for d in cards:
+        d["video"] = vids.get(d["name_en"])
+    cards.sort(key=lambda d: (-d["cover"], len(d["missing"])))
+    return {"dishes": cards, "model": llm.model()}
 
 
 # ---------------------------------------------------------------- cooked food
