@@ -495,7 +495,11 @@ def plan_today():
     with db.connect() as con:
         c = ctx(con)
         inv = engine.inventory(db.get_lots(con), c)
-    return {"dishes": planner.cook_first(inv, c), "today": c.today.isoformat(), "weather": c.weather}
+    dishes = planner.cook_first(inv, c)
+    vids = videos.recipe_videos([d["name_en"] for d in dishes])  # cached for a day; a missing video is reported as such
+    for d in dishes:
+        d["video"] = vids.get(d["name_en"])
+    return {"dishes": dishes, "today": c.today.isoformat(), "weather": c.weather}
 
 
 def _shopping(con) -> dict:
@@ -754,8 +758,8 @@ class GuestsIn(BaseModel):
     def _someone(self):
         from .occasions import conditions
 
-        if self.adults + self.minors == 0:
-            raise ValueError("add at least one guest")
+        if self.adults + self.minors == 0 and not self.include_family:
+            raise ValueError("add at least one person: guests, or the family")
         unknown = [c for c in self.conditions if c not in conditions()]
         if unknown:
             raise ValueError(f"unknown health conditions: {', '.join(unknown)}")

@@ -23,21 +23,26 @@ def search_url(query: str) -> str:
     return f"https://www.youtube.com/results?search_query={quote_plus(query)}"
 
 
+def _fetch(query: str) -> str:
+    """The YouTube results page for a search ('' when it can't be reached)."""
+    try:
+        r = httpx.get("https://www.youtube.com/results", params={"search_query": query, "hl": "en", "gl": "IN"},
+                      headers=HEADERS, timeout=5, follow_redirects=True)
+        return r.text if r.status_code == 200 else ""
+    except httpx.HTTPError:
+        return ""
+
+
 def recipe_video(dish: str) -> dict:
     query = f"{dish} recipe"
     hit = _cache.get(query)
     if hit and time.time() - hit[0] < TTL:
         return hit[1]
     out = {"query": query, "search_url": search_url(query), "video_id": None, "url": search_url(query)}
-    try:
-        r = httpx.get("https://www.youtube.com/results", params={"search_query": query, "hl": "en", "gl": "IN"},
-                      headers=HEADERS, timeout=5, follow_redirects=True)
-        m = VIDEO_ID.search(r.text) if r.status_code == 200 else None
-        if m:
-            out = {**out, "video_id": m.group(1), "url": f"https://www.youtube.com/watch?v={m.group(1)}",
-                   "thumbnail": f"https://i.ytimg.com/vi/{m.group(1)}/hqdefault.jpg"}
-    except httpx.HTTPError:
-        pass
+    m = VIDEO_ID.search(_fetch(query))
+    if m:
+        out = {**out, "video_id": m.group(1), "url": f"https://www.youtube.com/watch?v={m.group(1)}",
+               "thumbnail": f"https://i.ytimg.com/vi/{m.group(1)}/hqdefault.jpg"}
     _cache[query] = (time.time(), out)
     return out
 

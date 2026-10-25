@@ -77,8 +77,24 @@ def test_family_can_pick_their_own_dishes(api):
     assert r["selected"] == ["palak_paneer", "varan_bhaat"]
 
 
-def test_no_guests_is_refused(api):
-    assert plan(api, adults=0, minors=0).status_code == 422
+def test_family_only_meal_needs_no_guests(api):
+    r = plan(api, adults=0, minors=0)
+    assert r.status_code == 200 and r.json()["people"]["heads"] == 5  # just the Patils
+    assert plan(api, adults=0, minors=0, include_family=False).status_code == 422
+
+
+def test_cook_today_dishes_have_videos(api):
+    for d in api.get("/api/plan/today").json()["dishes"]:
+        assert d["video"]["url"].startswith("https://www.youtube.com/")
+
+
+def test_missing_video_is_reported(monkeypatch):
+    from anna import videos as v
+
+    v._cache.clear()
+    monkeypatch.setattr(v, "_fetch", lambda query: "<html>nothing here</html>")
+    out = v.recipe_video("an unheard-of dish")
+    assert out["video_id"] is None and out["url"] == out["search_url"]
 
 
 def test_ai_ideas_need_a_key(api):
