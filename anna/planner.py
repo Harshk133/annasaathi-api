@@ -8,6 +8,7 @@ from datetime import date, timedelta
 from .data import catalogue, cooked_tiers, fmt_days, fmt_qty, fmt_rate, recipes
 from .engine import (EPS, Ctx, adult_equivalents, allowed, daily_use, default_storage, lot_days_left,
                      project_remaining, shelf_range)
+from . import occasions
 from .household import needs
 
 WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
@@ -27,10 +28,12 @@ def cook_first(inv: list[dict], ctx: Ctx, slots=("breakfast", "lunch", "dinner")
     likes, avoids = _prep_prefs(h)
     styles = set(h.get("prep_styles") or ["wet", "roasted", "fried", "sprouts"]) | {"raw"}
     picks, used = [], set()
+    health_avoid = set(occasions.avoided_preps(h))  # e.g. a heart condition: no fried dishes
     for slot in slots:
         best, best_score, best_detail = None, -1e9, None
         fits = [r for r in recipes() if r["id"] not in used and allowed(r["diet"], h.get("diet", "veg"))
-                and (r["meal"] == slot or (slot == "breakfast" and r["meal"] == "snack"))]
+                and (r["meal"] == slot or (slot == "breakfast" and r["meal"] == "snack"))
+                and r["prep"] not in health_avoid]  # a member's health condition rules a style out entirely
         # the family's cooking styles first; any style only if nothing in style can be cooked from what's home
         in_style = [r for r in fits if r["prep"] in styles]
         for pool in ([in_style, fits] if in_style else [fits]):
@@ -183,6 +186,9 @@ def buy_right(lots: list[dict], ctx: Ctx, shop_day: date | None = None, extra_it
     by_item: dict[str, list[dict]] = {i: [] for i in extra_items if i in cat}
     for l in lots:
         by_item.setdefault(l["item_id"], []).append(l)
+    h = ctx.household
+    fests = occasions.festivals_for_shop(h, shop_day, interval)
+    fest_extra = _festival_extras(fests, ctx)
 
     buy, skip = [], []
     for item_id, ls in by_item.items():
@@ -203,7 +209,8 @@ def buy_right(lots: list[dict], ctx: Ctx, shop_day: date | None = None, extra_it
         lo, hi, notes = shelf_range(item, default_storage(item, ctx.household), ctx)
         shelf_mid = (lo + hi) / 2
         cover = min(shelf_mid, interval)
-        need = use * cover - fresh
+        extra = sum(e["qty"] for e in fest_extra.get(item_id, []))
+        need = use * cover - fresh + extra
         habit = max(ls, key=lambda l: (l["purchased_on"], l["id"]))["qty"] if ls else item.pack_size
         base = {
             "item_id": item.id, "emoji": item.emoji, "name_en": item.name_en, "name_hi": item.name_hi,
@@ -215,12 +222,18 @@ def buy_right(lots: list[dict], ctx: Ctx, shop_day: date | None = None, extra_it
             "stock_at_shop_label": fmt_qty(item, fresh) if fresh > EPS else "none",
             "need_qty": round(use * cover, 3), "need_label": fmt_qty(item, use * cover), "cover_days": round(cover, 1),
             "perishable": item.perishable,
+            "festival": [{**e["festival"], "qty": round(e["qty"], 3), "qty_label": fmt_qty(item, e["qty"]),
+                          "purpose": e["purpose"]} for e in fest_extra.get(item_id, [])],
+            "health": occasions.health_flags(h, item_id),
         }
-        if need < item.pack_size * 0.3:
-            if item.perishable or fresh < use * interval * 3 or item_id in extra_items:
+        # everyday use is covered but a festival needs more: still buy, and say it's for the festival
+        festival_shortfall = extra > EPS and need > EPS and need - extra < item.pack_size * 0.3
+        if need < item.pack_size * 0.3 and not festival_shortfall:
+            if item.perishable or fresh < use * interval * 3 or item_id in extra_items or extra > EPS:
                 when = "at home now" if days_to_shop <= 0 else f"still at home on {WEEKDAYS[shop_day.weekday()]}"
+                incl = f", including ~{fmt_qty(item, extra)} for {fest_extra[item_id][0]['festival']['name_en']}" if extra > EPS else ""
                 skip.append({**base, "reason": f"You have ~{fmt_qty(item, fresh)} {when} — "
-                                               f"enough for ~{fresh / use:.0f} days."})
+                                               f"enough for ~{max(fresh - extra, 0) / use:.0f} days{incl}."})
             continue
 
         shelf_s = f"keeps {fmt_days(lo, hi)} days" + (f" ({', '.join(notes)})" if notes else "")
@@ -237,7 +250,7 @@ def buy_right(lots: list[dict], ctx: Ctx, shop_day: date | None = None, extra_it
             reason = f"~{fmt_rate(item, use)}; {shelf_s}. Get it daily instead of {fmt_qty(item, habit)} at once."
         else:
             qty = round_to_pack(need, item.pack_size)
-            reason = f"{use_src.capitalize()} uses ~{fmt_rate(item, use)}; {shelf_s}, so buy for {cover:.0f} days{at_home}."
+            reason = f"{_cap(use_src)} uses ~{fmt_rate(item, use)}; {shelf_s}, so buy for {cover:.0f} days{at_home}."
             if shelf_mid < interval - 0.5:
                 step = max(1, int(shelf_mid))
                 top_day = shop_day + timedelta(days=step)
@@ -245,6 +258,18 @@ def buy_right(lots: list[dict], ctx: Ctx, shop_day: date | None = None, extra_it
                 if top_qty > EPS:
                     topup = {"day": WEEKDAYS[top_day.weekday()], "date": top_day.isoformat(), "qty": top_qty,
                              "qty_label": fmt_qty(item, top_qty), "every_days": step}
+        if extra > EPS:
+            names = " and ".join(f"{e['festival']['name_en']} ({e['purpose']})" for e in fest_extra[item_id])
+            if festival_shortfall:
+                qty = max(round_to_pack(need, item.pack_size), item.pack_size)
+                reason = (f"Enough at home for everyday use, but {names} needs ~{fmt_qty(item, extra)} more "
+                          f"(~{fmt_qty(item, need)} short).")
+            else:
+                if not daily:  # festival cooking needs more than the usual pack or the everyday formula
+                    qty = max(qty, round_to_pack(need, item.pack_size))
+                reason += f" Includes ~{fmt_qty(item, extra)} extra for {names}."
+        if "not counting" in use_src and _cap(use_src) not in reason:
+            reason = f"{_cap(use_src)}. {reason}"
         # money saved = food the usual purchase would let spoil, minus what this plan lets spoil
         plan_qty = qty * min(interval, shelf_mid) if daily else qty
         saved_qty = max(0.0, spoil_qty(habit + fresh, use, shelf_mid) - spoil_qty(plan_qty + fresh, use, shelf_mid))
@@ -259,6 +284,8 @@ def buy_right(lots: list[dict], ctx: Ctx, shop_day: date | None = None, extra_it
                          else f"Buy {fmt_qty(item, qty)}{per}"),
         })
     buy.sort(key=lambda r: (-r["saved_rupees"], not r["perishable"], r["category"]))
+    planned = {r["item_id"] for r in buy} | {r["item_id"] for r in skip}
+    suggestions = _suggestions(fest_extra, planned, ctx)
 
     def cost(r):
         return r["price"] + (round(r["topup"]["qty"] * cat[r["item_id"]].price) if r["topup"] else 0)
@@ -271,7 +298,74 @@ def buy_right(lots: list[dict], ctx: Ctx, shop_day: date | None = None, extra_it
         "saved_rupees": sum(r["saved_rupees"] for r in buy),
         "saved_kg": round(sum(r["saved_kg"] for r in buy), 2),
         "rule": "quantity = daily use × min(shelf life, days until next shop) − stock at home, rounded to pack size",
+        "festivals": [occasions.festival_card(f, ctx.today) for f in fests],
+        "suggestions": suggestions,
     }
+
+
+def _festival_extras(fests, ctx: Ctx) -> dict[str, list[dict]]:
+    """Extra quantity per item for the festivals this shop covers: extra per adult-equivalent
+    for the whole festival × the family's adult-equivalents, leaving out anyone whose health
+    condition excludes the item, and skipping items outside the family's diet."""
+    cat = catalogue()
+    h = ctx.household
+    ae = adult_equivalents(h)
+    out: dict[str, list[dict]] = {}
+    for f in fests:
+        for row in occasions.festival_items().get(f.id, []):
+            item = cat.get(row["item_id"])
+            if not item or not allowed(item.diet, h.get("diet", "veg")):
+                continue
+            skip_ae, _ = occasions.skipped_share(h, item.id)
+            qty = row["extra_per_ae"] * max(0.0, ae - skip_ae)
+            if qty <= EPS:
+                continue
+            out.setdefault(item.id, []).append({
+                "qty": qty, "purpose": row["purpose"],
+                "festival": {"id": f.id, "name_en": f.name_en, "name_hi": f.name_hi, "name_mr": f.name_mr,
+                             "start": f.start.isoformat(), "end": f.end.isoformat()},
+            })
+    return out
+
+
+def _suggestions(fest_extra: dict[str, list[dict]], planned: set[str], ctx: Ctx) -> list[dict]:
+    """Things worth adding that the everyday plan doesn't cover: festival items the family
+    doesn't usually buy, and alternatives for a family member's health condition."""
+    cat = catalogue()
+    out = []
+    for iid, extras in fest_extra.items():
+        if iid in planned:
+            continue
+        item = cat[iid]
+        total = sum(e["qty"] for e in extras)
+        qty = round_to_pack(total, item.pack_size) or item.pack_size
+        names = " and ".join(f"{e['festival']['name_en']} ({e['purpose']})" for e in extras)
+        out.append({**_item_fields(item), "kind": "festival", "qty": qty, "qty_label": fmt_qty(item, qty),
+                    "price": round(qty * item.price), "festival": extras[0]["festival"],
+                    "reason": f"For {names}: about {fmt_qty(item, total)} for your family."})
+    for s in occasions.health_suggestions(ctx.household):
+        item = cat.get(s["item_id"])
+        if not item or s["item_id"] in planned:
+            continue
+        who = " and ".join(s["for"])
+        out.append({**_item_fields(item), "kind": "health", "qty": item.pack_size,
+                    "qty_label": fmt_qty(item, item.pack_size), "price": round(item.pack_size * item.price),
+                    "condition": s["condition"], "for": s["for"],
+                    "reason": f"{s['note'].capitalize()} for {who}. Sugar and sweets are already planned without "
+                              f"{who}'s share. Check with their doctor before changing their diet."
+                    if s["condition"] == "diabetes" else f"{s['note'].capitalize()} for {who}."})
+    out.sort(key=lambda r: (r["kind"] != "health", r.get("festival", {}).get("start", ""), r["category"]))
+    return out
+
+
+def _cap(s: str) -> str:
+    """Capitalise the first letter only (str.capitalize would lowercase names like "Aaji")."""
+    return s[:1].upper() + s[1:]
+
+
+def _item_fields(item) -> dict:
+    return {"item_id": item.id, "emoji": item.emoji, "name_en": item.name_en, "name_hi": item.name_hi,
+            "name_mr": item.name_mr, "category": item.category, "unit": item.unit, "pack_size": item.pack_size}
 
 
 def recipe_consumption(recipe: dict, inv: list[dict], ctx: Ctx) -> list[dict]:
@@ -349,7 +443,9 @@ def shopping_view(plan: dict, overrides: dict[str, dict], bought: dict[str, dict
                          "reason": "Not part of your family's usual plan."}, "manual"))
     rows.sort(key=lambda r: (SHOP_ORDER[r["status"]], r["excluded"]))
     to_buy = [r for r in rows if r["status"] != "have" and not r["excluded"]]
+    on_list = {r["item_id"] for r in rows}
     return {
+        "suggestions": [x for x in plan.get("suggestions", []) if x["item_id"] not in on_list],
         "rows": rows,
         "counts": {"to_buy": len(to_buy), "bought": sum(r["purchased"] for r in rows),
                    "have": sum(r["status"] == "have" for r in rows), "excluded": sum(r["excluded"] for r in rows)},

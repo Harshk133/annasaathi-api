@@ -48,6 +48,7 @@ class Member(BaseModel):
     age: int = Field(ge=0, le=110)
     group: Group | None = None
     needs: list[str] = []
+    conditions: list[str] = []  # family-entered health conditions (planning only, not medical advice)
     note: str = Field(default="", max_length=80)
 
     @field_validator("name")
@@ -64,6 +65,16 @@ class Member(BaseModel):
         unknown = [n for n in v if n not in needs()]
         if unknown:
             raise ValueError(f"unknown needs: {', '.join(unknown)}")
+        return list(dict.fromkeys(v))
+
+    @field_validator("conditions")
+    @classmethod
+    def _known_conditions(cls, v: list[str]) -> list[str]:
+        from .occasions import conditions
+
+        unknown = [c for c in v if c not in conditions()]
+        if unknown:
+            raise ValueError(f"unknown health conditions: {', '.join(unknown)}")
         return list(dict.fromkeys(v))
 
     @model_validator(mode="after")
@@ -87,7 +98,19 @@ class Household(BaseModel):
     has_fridge: bool = True
     prep_styles: list[Prep] = Field(default_factory=lambda: ["wet", "roasted"], min_length=1)
     members: list[Member] = Field(min_length=1, max_length=12)
+    festivals: list[str] = []  # festivals the family celebrates; the list buys extra for them
     setup_seconds: float | None = None
+
+    @field_validator("festivals")
+    @classmethod
+    def _known_festivals(cls, v: list[str]) -> list[str]:
+        from .occasions import festival_options
+
+        known = {f["id"] for f in festival_options()}
+        unknown = [f for f in v if f not in known]
+        if unknown:
+            raise ValueError(f"unknown festivals: {', '.join(unknown)}")
+        return list(dict.fromkeys(v))
 
     @model_validator(mode="after")
     def _eat_out_fits(self):
@@ -98,6 +121,8 @@ class Household(BaseModel):
 
 
 def options() -> dict:
+    from .occasions import conditions as _conditions, festival_options
+
     """What the setup screens can offer, straight from the data tables."""
     return {
         "groups": [
@@ -114,4 +139,7 @@ def options() -> dict:
         "portions": [{"id": "light", "label": "Light"}, {"id": "normal", "label": "Normal"}, {"id": "hearty", "label": "Hearty"}],
         "prep_styles": [{"id": k, "label": v} for k, v in PREP_LABELS.items()],
         "needs": [{"id": n["id"], "label": n["label"], "kind": n["kind"]} for n in needs().values()],
+        "conditions": [{"id": c["id"], "label": c["label_en"], "label_hi": c["label_hi"], "label_mr": c["label_mr"]}
+                       for c in _conditions().values()],
+        "festivals": festival_options(),
     }

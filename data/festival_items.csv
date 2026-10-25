@@ -1,0 +1,66 @@
+festival_id,item_id,extra_per_ae,purpose
+diwali,sugar,0.25,sweets and faral
+diwali,besan,0.15,ladoo and chakli
+diwali,maida,0.15,shankarpali and karanji
+diwali,rava,0.1,ladoo
+diwali,ghee,0.08,sweets
+diwali,oil,0.15,frying faral
+diwali,poha,0.1,chivda
+diwali,peanuts,0.05,chivda
+diwali,dry_coconut,0.04,karanji
+diwali,cashews,0.03,sweets
+diwali,almonds,0.03,sweets
+diwali,raisins,0.02,sweets
+diwali,cardamom,0.003,sweets
+diwali,milk,0.3,sweets and kheer
+diwali,mithai,0.1,guests and gifts
+holi,maida,0.08,gujiya
+holi,dry_coconut,0.03,gujiya
+holi,sugar,0.1,gujiya and thandai
+holi,ghee,0.04,gujiya
+holi,oil,0.08,frying
+holi,milk,0.3,thandai
+holi,mithai,0.05,guests
+ganesh_chaturthi,rice_flour,0.1,ukadiche modak
+ganesh_chaturthi,coconut,0.3,modak filling
+ganesh_chaturthi,jaggery,0.1,modak filling
+ganesh_chaturthi,ghee,0.04,naivedya
+ganesh_chaturthi,cardamom,0.002,modak
+ganesh_chaturthi,mithai,0.05,prasad
+makar_sankranti,sesame,0.05,tilgul
+makar_sankranti,jaggery,0.1,tilgul
+makar_sankranti,peanuts,0.05,chikki
+makar_sankranti,bajra_flour,0.05,bhakri
+navratri,sabudana,0.1,fasting food
+navratri,peanuts,0.05,fasting food
+navratri,sweet_potato,0.1,fasting food
+navratri,sendha_namak,0.02,fasting food
+navratri,curd,0.1,fasting food
+navratri,banana,1,fasting food
+navratri,milk,0.2,fasting food
+gudi_padwa,chana_dal,0.08,puran poli
+gudi_padwa,jaggery,0.08,puran poli
+gudi_padwa,shrikhand,0.1,shrikhand-puri
+gudi_padwa,ghee,0.03,puran poli
+raksha_bandhan,mithai,0.08,sweets
+janmashtami,milk,0.3,prasad
+janmashtami,curd,0.1,dahi handi
+janmashtami,butter,0.03,prasad
+janmashtami,poha,0.05,gopalkala
+mahashivratri,sabudana,0.08,fasting food
+mahashivratri,peanuts,0.03,fasting food
+mahashivratri,sweet_potato,0.1,fasting food
+mahashivratri,milk,0.2,fasting food
+karva_chauth,mithai,0.03,sargi and puja
+karva_chauth,almonds,0.02,sargi
+eid_ul_fitr,vermicelli,0.08,sheer khurma
+eid_ul_fitr,milk,0.4,sheer khurma
+eid_ul_fitr,sugar,0.08,sheer khurma
+eid_ul_fitr,dates,0.05,sheer khurma
+eid_ul_fitr,cashews,0.02,sheer khurma
+eid_ul_fitr,almonds,0.02,sheer khurma
+christmas,maida,0.08,cake
+christmas,sugar,0.08,cake
+christmas,butter,0.05,cake
+christmas,eggs,1,cake
+christmas,raisins,0.02,cake

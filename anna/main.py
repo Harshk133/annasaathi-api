@@ -142,6 +142,16 @@ def demo_reset():
     return {"ok": True}
 
 
+@app.get("/api/festivals")
+def upcoming_festivals():
+    """The family's festivals that are on now or within the next 60 days (dates are approximate for lunar festivals)."""
+    from . import occasions
+
+    with db.connect() as con:
+        c = ctx(con)
+    return {"festivals": occasions.upcoming(c.household, c.today), "today": c.today.isoformat()}
+
+
 @app.get("/api/catalogue")
 def get_catalogue():
     return [{"id": i.id, "emoji": i.emoji, "name_en": i.name_en, "name_hi": i.name_hi, "name_mr": i.name_mr,

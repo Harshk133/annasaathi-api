@@ -149,3 +149,5 @@ almonds,🌰,Almonds,बादाम,बदाम,nuts,dry,M6,pantry,kg,0.1,900,
 cashews,🌰,Cashews,काजू,काजू,nuts,dry,M6,pantry,kg,0.1,950,0.0008,all,kaju|cashew,,,0
 raisins,🍇,Raisins,किशमिश,मनुका,nuts,dry,M6,pantry,kg,0.1,400,0.0005,all,kishmish|manuka|bedana|raisins,,,0
 makhana,🌰,Makhana,मखाना,मखाणा,nuts,dry,M6,pantry,kg,0.1,1000,0.0004,all,makhana|fox nut,,,0
+mithai,🍬,Sweets (mithai),मिठाई,मिठाई,packaged,wet,D5,fridge,kg,0.5,600,0,all,mithai|sweets|kaju katli|pedha|barfi|ladoo box,,box|boxes,0
+sugar_free,🧂,Sugar-free sweetener,शुगर-फ्री स्वीटनर,शुगर-फ्री स्वीटनर,misc,dry,Y1,pantry,pc,1,250,0,all,sugar free|sugarfree|stevia|sweetener|natura,0.1,pack|packs,0

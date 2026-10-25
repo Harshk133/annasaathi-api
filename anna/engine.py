@@ -56,8 +56,13 @@ def daily_use(item: Item, ctx: Ctx) -> tuple[float, str]:
     h = ctx.household
     if not allowed(item.diet, h.get("diet", "veg")):
         return 0.0, "not in your diet"
-    use = item.use_per_ae * adult_equivalents(h)
+    from .occasions import skipped_share
+
+    skip_ae, skipped = skipped_share(h, item.id)
+    use = item.use_per_ae * max(0.0, adult_equivalents(h) - skip_ae)
     fam = f"family of {len(h['members'])}"
+    if skipped:
+        fam += f", not counting {' and '.join(skipped)}"
     extra, needers = 0.0, []
     for m in h["members"]:
         for n in m.get("needs", []):

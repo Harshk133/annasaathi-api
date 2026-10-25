@@ -10,13 +10,67 @@
   "eat_out_meals_per_week": 2,
   "shop_interval_days": 7,
   "has_fridge": true,
-  "prep_styles": ["wet", "roasted"],
-  "members": [
-    {"name": "Sneha", "age": 38, "group": "adult", "note": "Works full-time; packs tiffins", "needs": []},
-    {"name": "Rahul", "age": 41, "group": "adult", "note": "Works full-time; travels Thursdays", "needs": []},
-    {"name": "Aaji", "age": 71, "group": "elder", "note": "Prefers roasted food; ajwain for digestion", "needs": ["ajwain", "roasted"]},
-    {"name": "Aarav", "age": 14, "group": "teen", "note": "Cricket practice, big appetite", "needs": []},
-    {"name": "Mira", "age": 8, "group": "child", "note": "Loves poha and banana", "needs": []}
+  "prep_styles": [
+    "wet",
+    "roasted"
   ],
-  "seed_bills": ["patil_provision_oct10", "blinkit_order_oct20"]
+  "festivals": [
+    "makar_sankranti",
+    "holi",
+    "gudi_padwa",
+    "ganesh_chaturthi",
+    "navratri",
+    "diwali"
+  ],
+  "members": [
+    {
+      "name": "Sneha",
+      "age": 38,
+      "group": "adult",
+      "note": "Works full-time; packs tiffins",
+      "needs": [],
+      "conditions": []
+    },
+    {
+      "name": "Rahul",
+      "age": 41,
+      "group": "adult",
+      "note": "Works full-time; travels Thursdays",
+      "needs": [],
+      "conditions": []
+    },
+    {
+      "name": "Aaji",
+      "age": 71,
+      "group": "elder",
+      "note": "Prefers roasted food; ajwain for digestion; diabetic",
+      "needs": [
+        "ajwain",
+        "roasted"
+      ],
+      "conditions": [
+        "diabetes"
+      ]
+    },
+    {
+      "name": "Aarav",
+      "age": 14,
+      "group": "teen",
+      "note": "Cricket practice, big appetite",
+      "needs": [],
+      "conditions": []
+    },
+    {
+      "name": "Mira",
+      "age": 8,
+      "group": "child",
+      "note": "Loves poha and banana",
+      "needs": [],
+      "conditions": []
+    }
+  ],
+  "seed_bills": [
+    "patil_provision_oct10",
+    "blinkit_order_oct20"
+  ]
 }

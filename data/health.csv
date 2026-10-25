@@ -1,0 +1,9 @@
+condition,effect,items,note
+diabetes,skip_share,sugar|jaggery|mithai|shrikhand|jam|juice,high in sugar
+diabetes,flag,sugar|jaggery|mithai|shrikhand|jam|juice|biscuits|cornflakes|honey,high in sugar
+diabetes,suggest,sugar_free,a sugar-free option
+bp,skip_share,pickle|papad|namkeen|instant_noodles,high in salt
+bp,flag,salt|pickle|papad|namkeen|instant_noodles|tomato_ketchup|cheese,high in salt
+heart,skip_share,namkeen|papad|mithai,high in fat or salt
+heart,flag,ghee|butter|cream|cheese|namkeen|papad|mithai,high in fat or salt
+heart,avoid_prep,fried,
